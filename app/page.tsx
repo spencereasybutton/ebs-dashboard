@@ -11,8 +11,7 @@ export default async function Home() {
 
   const { data, error } = await supabase
     .from("ebs_data")
-    .select("*")
-    .limit(10);
+    .select("*");
 
   return (
     <div style={{ padding: 40 }}>
@@ -21,11 +20,18 @@ export default async function Home() {
 
       <h2>Supabase Data</h2>
 
-      {error ? (
-        <pre>{error.message}</pre>
-      ) : (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      )}
+      {/* 👇 THIS is the <pre> */}
+      {data && data.length > 0 ? (
+  <div>
+    {data.map((row: any) => (
+      <div key={row.id}>
+        <p>{row.name}</p>
+      </div>
+    ))}
+  </div>
+) : (
+  <p>No data yet</p>
+)}
     </div>
   );
 }
