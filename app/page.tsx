@@ -24,9 +24,19 @@ export default async function Home() {
       {data && data.length > 0 ? (
   <div>
     {data.map((row: any) => (
-      <div key={row.id}>
-        <p>{row.name}</p>
-      </div>
+      <div
+  key={row.id}
+  style={{
+    border: "1px solid #ddd",
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 12,
+    background: "#f9f9f9",
+  }}
+>
+  <p><strong>Name:</strong> {row.name}</p>
+  <p><strong>ID:</strong> {row.id}</p>
+</div>
     ))}
   </div>
 ) : (
