@@ -19,7 +19,7 @@ export default async function Home() {
       <p>Logged in as: {userId}</p>
 
       <h2>Supabase Data</h2>
-
+{error && <p style={{ color: "red" }}>{error.message}</p>}
       {/* 👇 THIS is the <pre> */}
       {data && data.length > 0 ? (
   <div>
