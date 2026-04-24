@@ -11,7 +11,8 @@ export default async function Home() {
 
   const { data, error } = await supabase
     .from("ebs_data")
-    .select("*");
+.select("*")
+.eq("user_id", userId);
 
   return (
     <div style={{ padding: 40 }}>
