@@ -1,6 +1,8 @@
+import { ClerkProvider } from "@clerk/nextjs";
+
 export const metadata = {
-  title: "EBS Dashboard",
-  description: "Easy Button Software Platform"
+  title: "Easy Button Software",
+  description: "EBS Affiliate + CRM Platform"
 };
 
 export default function RootLayout({
@@ -9,8 +11,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
