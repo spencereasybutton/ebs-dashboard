@@ -452,7 +452,7 @@ const linkBox = {
   padding: 14,
   fontSize: 13,
   marginTop: 12,
-  wordBreak: "break-all",
+  wordBreak: "break-all" as const,
 };
 
 const copyButton = {
