@@ -1,5 +1,9 @@
 import { ClerkProvider } from "@clerk/nextjs";
 
+<ClerkProvider>
+  {children}
+</ClerkProvider>
+
 export const metadata = {
   title: "Easy Button Software",
   description: "EBS affiliate and product routing hub",
