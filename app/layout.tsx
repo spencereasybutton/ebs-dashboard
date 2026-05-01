@@ -1,3 +1,19 @@
+<SignOutButton>
+  <button
+    style={{
+      background: "#ef4444",
+      color: "#fff",
+      padding: "8px 14px",
+      borderRadius: 8,
+      border: "none",
+      cursor: "pointer",
+      fontWeight: 600,
+    }}
+  >
+    Logout
+  </button>
+</SignOutButton>
+
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
