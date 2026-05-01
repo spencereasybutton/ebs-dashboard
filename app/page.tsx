@@ -1,85 +1,99 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-const cardLabel = {
-  margin: 0,
-  color: "#9ca3af",
-  fontSize: 13,
-  fontWeight: 800,
-};
+import { SignOutButton } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-const cardValue = {
-  margin: "8px 0 6px",
-  fontSize: 30,
-  letterSpacing: -0.5,
-};
+export default async function Page() {
+  const { userId } = await auth();
 
-const cardDetail = {
-  margin: 0,
-  color: "#6b7280",
-  fontSize: 13,
-};
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
-const productGrid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-  gap: 18,
-  marginBottom: 18,
-};
+  const user = await currentUser();
+  const email =
+    user?.emailAddresses?.[0]?.emailAddress || "affiliate@example.com";
 
-const panelCard = {
-  background: "rgba(10,10,12,0.86)",
-  border: "1px solid rgba(255,255,255,0.10)",
-  borderRadius: 24,
-  padding: 22,
-  boxShadow: "0 28px 80px rgba(0,0,0,0.26)",
-};
+  return (
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#050505",
+        color: "#fff",
+        display: "flex",
+        fontFamily: "sans-serif",
+      }}
+    >
+      {/* Sidebar */}
+      <div
+        style={{
+          width: 260,
+          background: "#0b0b0f",
+          borderRight: "1px solid rgba(255,255,255,0.1)",
+          padding: 20,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          <h2 style={{ margin: 0 }}>EBS</h2>
+          <p style={{ color: "#aaa" }}>Affiliate Portal</p>
+        </div>
 
-const panelHeader = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: 14,
-  flexWrap: "wrap" as const,
-};
+        <div>
+          <p style={{ fontSize: 12, color: "#aaa" }}>Logged in as</p>
+          <p style={{ fontWeight: "bold" }}>{email}</p>
 
-const metricRow = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-  gap: 16,
-  marginTop: 20,
-};
+          <SignOutButton redirectUrl="/sign-in">
+            <button
+              style={{
+                marginTop: 10,
+                width: "100%",
+                padding: 10,
+                background: "#dc2626",
+                border: "none",
+                color: "#fff",
+                borderRadius: 8,
+                cursor: "pointer",
+              }}
+            >
+              Logout
+            </button>
+          </SignOutButton>
+        </div>
+      </div>
 
-const sectionMetric = {
-  margin: "6px 0 0",
-  fontSize: 24,
-};
+      {/* Main */}
+      <div style={{ flex: 1, padding: 30 }}>
+        <h1>EBS Dashboard 🚀</h1>
 
-const pill = {
-  display: "inline-block",
-  background: "rgba(220,38,38,0.16)",
-  color: "#fca5a5",
-  border: "1px solid rgba(248,113,113,0.20)",
-  borderRadius: 999,
-  padding: "6px 10px",
-  fontSize: 12,
-  fontWeight: 900,
-};
+        <div
+          style={{
+            marginTop: 20,
+            padding: 20,
+            borderRadius: 12,
+            background: "#111113",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <h3>Your Affiliate Link</h3>
+          <p>https://easybuttonsoftware.com/?ref={userId}</p>
+        </div>
 
-const tableStyle = {
-  width: "100%",
-  borderCollapse: "collapse" as const,
-  fontSize: 14,
-  minWidth: 720,
-};
-
-const th = {
-  color: "#9ca3af",
-  textAlign: "left" as const,
-  borderBottom: "1px solid rgba(255,255,255,0.08)",
-  padding: "12px 10px",
-};
-
-const td = {
-  borderBottom: "1px solid rgba(255,255,255,0.06)",
-  padding: "14px 10px",
-  color: "#e5e7eb",
-};
+        <div
+          style={{
+            marginTop: 20,
+            padding: 20,
+            borderRadius: 12,
+            background: "#111113",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <h3>Stats (Placeholder)</h3>
+          <p>Revenue: $0</p>
+          <p>Commission: $0</p>
+        </div>
+      </div>
+    </main>
+  );
+}
