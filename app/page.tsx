@@ -1,94 +1,85 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { SignOutButton } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+const cardLabel = {
+  margin: 0,
+  color: "#9ca3af",
+  fontSize: 13,
+  fontWeight: 800,
+};
 
-export default async function Home() {
-  const { userId } = await auth();
+const cardValue = {
+  margin: "8px 0 6px",
+  fontSize: 30,
+  letterSpacing: -0.5,
+};
 
-  if (!userId) {
-    redirect("/sign-in");
-  }
+const cardDetail = {
+  margin: 0,
+  color: "#6b7280",
+  fontSize: 13,
+};
 
-  const user = await currentUser();
-  const email = user?.emailAddresses?.[0]?.emailAddress || "affiliate@example.com";
-  const name = user?.firstName || "Affiliate";
+const productGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+  gap: 18,
+  marginBottom: 18,
+};
 
-  return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#080b12",
-        color: "#ffffff",
-        fontFamily: "sans-serif",
-      }}
-    >
-      {/* HEADER */}
-      <header
-        style={{
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-          padding: "20px 40px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <h2 style={{ margin: 0 }}>EBS Dashboard 🚀</h2>
-          <p style={{ margin: 0, color: "#9ca3af" }}>{email}</p>
-        </div>
+const panelCard = {
+  background: "rgba(10,10,12,0.86)",
+  border: "1px solid rgba(255,255,255,0.10)",
+  borderRadius: 24,
+  padding: 22,
+  boxShadow: "0 28px 80px rgba(0,0,0,0.26)",
+};
 
-        {/* ✅ LOGOUT BUTTON */}
-        <SignOutButton redirectUrl="/sign-in">
-          <button
-            style={{
-              background: "#ef4444",
-              color: "#fff",
-              padding: "10px 16px",
-              borderRadius: 8,
-              border: "none",
-              cursor: "pointer",
-              fontWeight: 700,
-            }}
-          >
-            Logout
-          </button>
-        </SignOutButton>
-      </header>
+const panelHeader = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 14,
+  flexWrap: "wrap" as const,
+};
 
-      {/* BODY */}
-      <section style={{ padding: 40 }}>
-        <h1>Welcome, {name}</h1>
+const metricRow = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+  gap: 16,
+  marginTop: 20,
+};
 
-        <div
-          style={{
-            marginTop: 20,
-            padding: 20,
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: 12,
-          }}
-        >
-          <h3>Affiliate Overview</h3>
+const sectionMetric = {
+  margin: "6px 0 0",
+  fontSize: 24,
+};
 
-          <p>Total Revenue: $12,430</p>
-          <p>Total Commission: $3,729</p>
-          <p>Pending Payouts: $1,100</p>
-        </div>
+const pill = {
+  display: "inline-block",
+  background: "rgba(220,38,38,0.16)",
+  color: "#fca5a5",
+  border: "1px solid rgba(248,113,113,0.20)",
+  borderRadius: 999,
+  padding: "6px 10px",
+  fontSize: 12,
+  fontWeight: 900,
+};
 
-        <div
-          style={{
-            marginTop: 20,
-            padding: 20,
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: 12,
-          }}
-        >
-          <h3>Your Referral Link</h3>
+const tableStyle = {
+  width: "100%",
+  borderCollapse: "collapse" as const,
+  fontSize: 14,
+  minWidth: 720,
+};
 
-          <p>
-            https://easybuttonsoftware.com/?ref=EBS-{userId?.slice(-6)}
-          </p>
-        </div>
-      </section>
-    </main>
-  );
-}
+const th = {
+  color: "#9ca3af",
+  textAlign: "left" as const,
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
+  padding: "12px 10px",
+};
+
+const td = {
+  borderBottom: "1px solid rgba(255,255,255,0.06)",
+  padding: "14px 10px",
+  color: "#e5e7eb",
+};
