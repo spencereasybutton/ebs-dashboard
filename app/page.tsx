@@ -1,3 +1,4 @@
+```tsx
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -483,4 +484,3 @@ const td = {
   padding: "14px 10px",
   color: "#e5e7eb",
 };
-```
