@@ -1,6 +1,6 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { SignOutButton } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { LogoutButton } from "./components/LogoutButton";
 
 const affiliateLinks = [
   {
@@ -192,22 +192,7 @@ export default async function Page() {
             {email}
           </p>
 
-          <SignOutButton redirectUrl="/sign-in">
-            <button
-              style={{
-                width: "100%",
-                padding: "12px 14px",
-                background: "#dc2626",
-                border: "none",
-                color: "#fff",
-                borderRadius: 12,
-                cursor: "pointer",
-                fontWeight: 900,
-              }}
-            >
-              Logout
-            </button>
-          </SignOutButton>
+          <LogoutButton />
         </div>
       </aside>
 

@@ -1,4 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
+import { clerkAuthAppearance } from "../../../lib/clerk-auth-appearance";
 
 export default function Page() {
   return (
@@ -12,25 +13,11 @@ export default function Page() {
       }}
     >
       <SignIn
+        routing="path"
+        path="/sign-in"
+        signUpUrl="/sign-up"
         forceRedirectUrl="/"
-        appearance={{
-          variables: {
-            colorPrimary: "#dc2626",
-            colorBackground: "#09090b",
-            colorText: "#ffffff",
-            colorInputBackground: "#111113",
-            colorInputText: "#ffffff",
-          },
-          elements: {
-            card: {
-              backgroundColor: "#09090b",
-              border: "1px solid rgba(255,255,255,0.1)",
-            },
-            formButtonPrimary: {
-              backgroundColor: "#dc2626",
-            },
-          },
-        }}
+        appearance={clerkAuthAppearance}
       />
     </main>
   );

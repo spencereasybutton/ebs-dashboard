@@ -1,4 +1,11 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { PT_Sans } from "next/font/google";
+
+const ptSans = PT_Sans({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Easy Button Software",
@@ -11,9 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      afterSignOutUrl="/sign-in"
+    >
       <html lang="en">
-        <body style={{ margin: 0, background: "#050505" }}>{children}</body>
+        <body
+          className={ptSans.className}
+          style={{ margin: 0, background: "#050505" }}
+        >
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
