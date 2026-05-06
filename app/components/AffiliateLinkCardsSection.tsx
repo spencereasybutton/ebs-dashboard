@@ -1,3 +1,6 @@
+"use client";
+
+import { useAffiliateFirstPromoter } from "./AffiliateFirstPromoterContext";
 import { AffiliateLinkCard } from "./AffiliateLinkCard";
 import type { AffiliateLinkCardData } from "./AffiliateLinkCard";
 
@@ -33,8 +36,14 @@ const DUMMY_AFFILIATE_LINKS: AffiliateLinkCardData[] = [
 ];
 
 export function AffiliateLinkCardsSection() {
+  const { data, isRefetching } = useAffiliateFirstPromoter();
+
   return (
     <section
+      data-dashboard-section="affiliate-link-cards"
+      data-fp-found={data.found ? "true" : "false"}
+      data-fp-campaigns={String(data.campaigns.length)}
+      data-fp-refetching={isRefetching ? "true" : "false"}
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",

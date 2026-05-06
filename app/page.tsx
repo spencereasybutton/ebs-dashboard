@@ -1,6 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import type { CSSProperties } from "react";
 import { redirect } from "next/navigation";
+import { getCompanyPromoterByEmail } from "../lib/firstpromoter-client";
 import { DashboardMainContent } from "./components/DashboardMainContent";
 import { DashboardSidebar } from "./components/DashboardSidebar";
 
@@ -23,13 +24,20 @@ export default async function Page() {
 
   const user = await currentUser();
   const email =
-    user?.emailAddresses?.[0]?.emailAddress || "affiliate@example.com";
+    user?.primaryEmailAddress?.emailAddress ??
+    user?.emailAddresses?.[0]?.emailAddress ??
+    "affiliate@example.com";
   const firstName = user?.firstName || "Affiliate";
+
+  const initialAffiliateData = await getCompanyPromoterByEmail("smithsp1996@gmail.com");
 
   return (
     <main style={dashboardMainStyle}>
       <DashboardSidebar email={email} />
-      <DashboardMainContent firstName={firstName} />
+      <DashboardMainContent
+        firstName={firstName}
+        initialAffiliateData={initialAffiliateData}
+      />
     </main>
   );
 }

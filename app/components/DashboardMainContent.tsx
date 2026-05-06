@@ -1,3 +1,5 @@
+import type { FirstPromoterAffiliateDto } from "../../lib/firstpromoter-dto";
+import { AffiliateFirstPromoterProvider } from "./AffiliateFirstPromoterContext";
 import { AffiliateLinkCardsSection } from "./AffiliateLinkCardsSection";
 import { AffiliatePerformanceTable } from "./AffiliatePerformanceTable";
 import { DashboardWelcomeHeader } from "./DashboardWelcomeHeader";
@@ -7,22 +9,29 @@ import { TopPerformingPayoutSection } from "./TopPerformingPayoutSection";
 
 export type DashboardMainContentProps = {
   firstName: string;
+  initialAffiliateData: FirstPromoterAffiliateDto;
 };
 
-export function DashboardMainContent({ firstName }: DashboardMainContentProps) {
+export function DashboardMainContent({
+  firstName,
+  initialAffiliateData,
+}: DashboardMainContentProps) {
+  console.log("-=-=--=-", initialAffiliateData);
   return (
-    <section style={{ flex: 1, padding: 34 }}>
-      <DashboardWelcomeHeader firstName={firstName} />
+    <AffiliateFirstPromoterProvider initialData={initialAffiliateData}>
+      <section style={{ flex: 1, padding: 34 }}>
+        <DashboardWelcomeHeader firstName={firstName} />
 
-      <KPIs />
+        <KPIs />
 
-      <TopPerformingPayoutSection />
+        <TopPerformingPayoutSection />
 
-      <AffiliatePerformanceTable />
+        <AffiliatePerformanceTable />
 
-      <AffiliateLinkCardsSection />
+        <AffiliateLinkCardsSection />
 
-      <RecentReferralActivitySection />
-    </section>
+        <RecentReferralActivitySection />
+      </section>
+    </AffiliateFirstPromoterProvider>
   );
 }

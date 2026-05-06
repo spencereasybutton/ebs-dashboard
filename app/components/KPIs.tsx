@@ -1,4 +1,7 @@
+"use client";
+
 import { money } from "../../lib/money";
+import { useAffiliateFirstPromoter } from "./AffiliateFirstPromoterContext";
 import { Kpi } from "./Kpi";
 
 /** Placeholder rows — replace with an API fetch inside this component later. */
@@ -33,6 +36,8 @@ function sum(
 }
 
 export function KPIs() {
+  const { data, isRefetching } = useAffiliateFirstPromoter();
+
   const totalClicks = sum("clicks");
   const totalLeads = sum("leads");
   const totalCustomers = sum("customers");
@@ -45,6 +50,10 @@ export function KPIs() {
 
   return (
     <section
+      data-dashboard-section="kpis"
+      data-fp-found={data.found ? "true" : "false"}
+      data-fp-campaigns={String(data.campaigns.length)}
+      data-fp-refetching={isRefetching ? "true" : "false"}
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",

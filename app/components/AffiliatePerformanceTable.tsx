@@ -1,4 +1,7 @@
+"use client";
+
 import { money } from "../../lib/money";
+import { useAffiliateFirstPromoter } from "./AffiliateFirstPromoterContext";
 
 const td = {
   padding: "14px 10px",
@@ -58,8 +61,14 @@ const TABLE_COLUMN_HEADERS = [
 ] as const;
 
 export function AffiliatePerformanceTable() {
+  const { data, isRefetching } = useAffiliateFirstPromoter();
+  console.log("-=-=--=-", data);
   return (
     <section
+      data-dashboard-section="affiliate-performance-table"
+      data-fp-found={data.found ? "true" : "false"}
+      data-fp-campaigns={String(data.campaigns.length)}
+      data-fp-refetching={isRefetching ? "true" : "false"}
       style={{
         background: "rgba(10,10,12,0.88)",
         border: "1px solid rgba(255,255,255,0.10)",

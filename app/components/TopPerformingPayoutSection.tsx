@@ -1,4 +1,7 @@
+"use client";
+
 import { money } from "../../lib/money";
+import { useAffiliateFirstPromoter } from "./AffiliateFirstPromoterContext";
 
 /** Replace with API-driven data inside this component later. */
 const DUMMY_TOP_LINK = {
@@ -17,10 +20,14 @@ function totalCommissionFromDummy() {
 }
 
 export function TopPerformingPayoutSection() {
+  const { data, isRefetching } = useAffiliateFirstPromoter();
   const totalCommission = totalCommissionFromDummy();
 
   return (
     <section
+      data-dashboard-section="top-performing-payout"
+      data-fp-found={data.found ? "true" : "false"}
+      data-fp-refetching={isRefetching ? "true" : "false"}
       style={{
         display: "grid",
         gridTemplateColumns: "minmax(0, 1.4fr) minmax(280px, 0.8fr)",

@@ -1,3 +1,7 @@
+"use client";
+
+import { useAffiliateFirstPromoter } from "./AffiliateFirstPromoterContext";
+
 export type ReferralActivityItem = {
   event: string;
   source: string;
@@ -32,8 +36,13 @@ const DUMMY_RECENT_ACTIVITY: ReferralActivityItem[] = [
 ];
 
 export function RecentReferralActivitySection() {
+  const { data, isRefetching } = useAffiliateFirstPromoter();
+
   return (
     <section
+      data-dashboard-section="recent-referral-activity"
+      data-fp-found={data.found ? "true" : "false"}
+      data-fp-refetching={isRefetching ? "true" : "false"}
       style={{
         marginTop: 18,
         background: "rgba(10,10,12,0.88)",

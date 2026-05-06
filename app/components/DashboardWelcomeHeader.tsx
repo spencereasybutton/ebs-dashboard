@@ -1,3 +1,7 @@
+"use client";
+
+import { useAffiliateFirstPromoter } from "./AffiliateFirstPromoterContext";
+
 export type DashboardWelcomeHeaderProps = {
   firstName: string;
 };
@@ -5,8 +9,13 @@ export type DashboardWelcomeHeaderProps = {
 export function DashboardWelcomeHeader({
   firstName,
 }: DashboardWelcomeHeaderProps) {
+  const { data, isRefetching } = useAffiliateFirstPromoter();
+
   return (
     <header
+      data-dashboard-section="welcome-header"
+      data-fp-found={data.found ? "true" : "false"}
+      data-fp-refetching={isRefetching ? "true" : "false"}
       style={{
         display: "flex",
         justifyContent: "space-between",
